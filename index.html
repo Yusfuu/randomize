@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+
+  <div class="absolute bottom-0 right-0">
+    <canvas id="confetti"></canvas>
+  </div>
+
+  <div id="candidateBody" class="flex items-center gap-4 m-10 justify-around hidden">
+    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="table_head">ID</th>
+            <th scope="col" class="table_head"> Name</th>
+            <th scope="col" class="table_head"> brief</th>
+            <th scope="col" class="table_head">Status</th>
+          </tr>
+        </thead>
+        <tbody id="candidateContainer" class="bg-white divide-y divide-gray-200">
+          <!-- content here -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="self-baseline sticky top-3 flex flex-col justify-center items-center">
+      <div class="space-x-3">
+        <button type="button" id="save" class="btn bg-gray-800 opacity-50" disabled>Save</button>
+        <button id="shuffle" type="button" class="btn bg-blue-500 opacity-50" disabled>Shuffle</button>
+        <button id="export" type="button" class="btn bg-indigo-500 opacity-50" disabled>Export</button>
+      </div>
+      <div id="display"
+        class="bg-indigo-200 rounded-lg mt-6 p-6 flex items-center self-stretch justify-center flex-col hidden">
+        <h1 id="_name" class="font-semibold text-lg text-indigo-500"></h1>
+        <p id="_date" class="text-gray-500 text-sm md:text-base"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="startContent" class="h-screen flex justify-center items-center text-white">
+    <div class="bg-gray-900 shadow-lg rounded-lg py-6 sm:py-8 lg:py-12">
+      <div class="px-4 md:px-8 mx-auto">
+        <div class="max-w-xl flex flex-col items-center text-center mx-auto">
+          <p class="text-indigo-500 md:text-lg xl:text-xl font-semibold mb-4 md:mb-6">Proud to introduce</p>
+
+          <h1 class="text-black-800 text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12">Revolutionary way to build
+            the web</h1>
+
+          <form id="start" class="w-full flex flex-col sm:flex-row sm:justify-center gap-2.5">
+            <input id="_number" name="number" autocomplete="off" class="strater_inputs" />
+            <input type="date" id="initDate" name="date" autocomplete="off" class="strater_inputs" />
+            <button id="startNow" class="opacity-50 strater_submit" disabled>Start now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const focusout = (event) => {
+      const inputs = [...document.querySelector("table").getElementsByTagName('input')];
+      const isAllInputsValid = inputs.every(element => element.value.trim().length > 0);
+      if (isAllInputsValid) {
+        document.querySelector('#save').classList.remove('opacity-50');
+        document.querySelector('#save').disabled = false;
+      } else {
+        document.querySelector('#save').classList.add('opacity-50');
+        document.querySelector('#save').disabled = true;
+      }
+    }
+  </script>
+  <script type="module" src="/src/main.ts" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.btn {
+  @apply transition-all focus:ring text-white text-sm md:text-base font-semibold text-center rounded-lg px-8 py-3 shadow-md;
+}
+.input {
+  @apply transition-all max-w-md self-center w-full bg-gray-50 text-gray-800 ring-indigo-300 border focus:ring rounded outline-none px-3 py-2;
+}
+
+.label {
+  @apply inline-block text-gray-800 text-sm sm:text-base mb-2;
+}
+
+.date {
+  @apply bg-indigo-500 rounded-lg shadow-md px-2 text-white font-semibold outline-none cursor-pointer;
+}
+
+._input {
+  @apply transition-all focus:ring focus:shadow-md font-medium ring-indigo-400 p-1 pl-2 outline-none rounded-lg;
+}
+
+
+.strater_inputs {
+  @apply text-gray-800 bg-gray-50 transition-all focus:ring ring-indigo-400 text-sm md:text-base font-semibold rounded-lg outline-none px-2 py-3;
+}
+
+.strater_submit {
+  @apply bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-5 py-3;
+}
+
+.table_head {
+  @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
