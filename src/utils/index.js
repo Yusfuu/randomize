@@ -2,11 +2,11 @@
 import ConfettiGenerator from "confetti-js";
 import moment from "moment";
 
-export const getRowById = (key: number) => {
+export const getRowById = (key) => {
   return document.querySelector(`[data-id="${key}"]`);
 }
 
-export const exportContentCSV = (content: string) => {
+export const exportContentCSV = (content) => {
   const csvContent = "data:text/csv;charset=utf-8," + content;
   const link = document.createElement('a');
   link.setAttribute("href", csvContent);
@@ -14,7 +14,7 @@ export const exportContentCSV = (content: string) => {
   link.click();
 }
 
-export const getNextDay = (date: string, days: number) => {
+export const getNextDay = (date, days) => {
   let d = moment(new Date(date)).add(Math.floor(days / 5) * 7, 'd');
   let remaining = days % 5;
   while (remaining) {
@@ -26,7 +26,7 @@ export const getNextDay = (date: string, days: number) => {
 };
 
 
-export const row = (key: number): string => (
+export const row = (key) => (
   `
   <tr data-id="${key}" class="transition-all">
   <td class="px-6 py-4 whitespace-nowrap">
@@ -37,13 +37,13 @@ export const row = (key: number): string => (
 <td class="px-6 py-4 whitespace-nowrap">
   <div class="flex items-center">
     <div class="text-sm font-medium text-gray-900">
-    <input onfocusout="focusout()" type="text" class="_input">
+    <input oninput="onInput(event)" onfocusout="focusout()" type="text" class="_input">
     </div>
   </div>
 </td>
 <td class="px-6 py-4 whitespace-nowrap">
   <div class="text-sm text-gray-900">
-  <input onfocusout="focusout()" type="text" class="_input">
+  <input oninput="onInput(event)" onfocusout="focusout()" type="text" class="_input">
   </div>
 </td>
 <td class="px-6 py-4 whitespace-nowrap">
@@ -62,19 +62,18 @@ export const initConfetti = () => {
   confetti.render();
 }
 
-type Element = HTMLFormElement | HTMLInputElement | HTMLButtonElement | HTMLDivElement;
-export const query = (id: string) => document.querySelector<Element>(id);
+export const query = (id) => document.querySelector(id);
 
 
 
-export const displayCandidate = (name: string, date: string) => {
+export const displayCandidate = (name, date) => {
   // @ts-ignore
   query('#_name').innerHTML = name;
   // @ts-ignore
   query('#_date').innerHTML = date;
 }
 
-export const disableButton = (button: any, disable: boolean): void => {
+export const disableButton = (button, disable) => {
   if (disable) {
     button.classList.add('opacity-50', 'cursor-not-allowed');
     button.disabled = true;

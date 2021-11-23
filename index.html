@@ -77,8 +77,18 @@
         document.querySelector('#save').disabled = true;
       }
     }
+
+    const onInput = (event) => {
+      const value = event.target.value;
+      const isValid = /^[0-9a-zA-Z\s]+$/gi.test(value)
+      if (isValid) {
+        event.target.classList.replace("ring-red-400", "ring-indigo-400");
+      } else {
+        event.target.classList.replace("ring-indigo-400", "ring-red-400");
+      }
+    }
   </script>
-  <script type="module" src="/src/main.ts" defer></script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>

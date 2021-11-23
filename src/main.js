@@ -1,17 +1,10 @@
 import './style.css'
 import { query, exportContentCSV, getNextDay, getRowById, initConfetti, row, displayCandidate, disableButton } from './utils';
 
-type TCandidates = {
-  key: any;
-  name: string;
-  breif: string;
-  date?: string;
-}
-
-let ExporterCandidates: Array<TCandidates> = [];
-let NUMBER_CANDIDATES: number;
-let Candidates: Array<TCandidates> = [];
-let currentDate: string = new Date().toISOString().split('T')[0];
+let ExporterCandidates = [];
+let NUMBER_CANDIDATES;
+let Candidates = [];
+let currentDate = new Date().toISOString().split('T')[0];
 
 const start = query('#start');
 const _number = query('#_number');
@@ -27,7 +20,7 @@ const date = query('#initDate');
 
 _number?.addEventListener('input', (event) => {
   // @ts-ignore
-  const text: string = event.target.value;
+  const text = event.target.value;
 
   if (!isNaN(+text) && text.trim().length > 0) {
     startNow?.removeAttribute("disabled");
@@ -41,7 +34,7 @@ _number?.addEventListener('input', (event) => {
 start?.addEventListener('submit', (event) => {
   event.preventDefault();
   // @ts-ignore
-  NUMBER_CANDIDATES = +_number?.value!;
+  NUMBER_CANDIDATES = +_number?.value;
   startContent?.remove();
   // init app
   initCandidates();
@@ -50,7 +43,7 @@ start?.addEventListener('submit', (event) => {
 save?.addEventListener('click', () => {
   // @ts-ignore
   const children = [...candidateContainer?.children];
-  children.forEach((item: HTMLTableColElement) => {
+  children.forEach((item) => {
     // @ts-ignore
     const [nameInput, breifInput] = [...item.getElementsByTagName('input')];
 
@@ -77,7 +70,7 @@ shuffle?.addEventListener('click', () => {
   // get random id from Candidates array
   const index = keys[~~(Math.random() * keys.length)];
   // find the candidate that selectd with index
-  const current: TCandidates = Candidates.find(item => +item.key === index)!;
+  const current = Candidates.find(item => +item.key === index);
   // filter what left from the  Candidates array
   Candidates = Candidates.filter(item => +item.key !== index);
 
