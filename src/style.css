@@ -19,7 +19,7 @@
 }
 
 ._input {
-  @apply transition-all focus:ring focus:shadow-md font-medium ring-indigo-400 p-1 pl-2 outline-none rounded-lg;
+  @apply transition-all focus:ring focus:shadow-md font-medium p-1 pl-2 outline-none rounded-lg;
 }
 
 

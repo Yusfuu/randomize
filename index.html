@@ -63,10 +63,33 @@
       </div>
     </div>
   </div>
-
-
   <script>
-    const focusout = (event) => {
+    const onInput = (event) => {
+      const value = event.target.value;
+      const isValid = /^[0-9a-zA-Z\s]+$/gi.test(value);
+
+      if (isValid) {
+        document.querySelector('#save').classList.remove('opacity-50');
+        document.querySelector('#save').disabled = false;
+        event.target.classList.replace("ring-red-400", "ring-green-400");
+        checkAllInputsIsValid();
+      } else {
+        console.log(document.querySelector('#save'));
+        document.querySelector('#save').classList.add('opacity-50', "azazz");
+        document.querySelector('#save').disabled = true;
+        event.target.classList.replace("ring-green-400", "ring-red-400");
+      }
+
+    }
+
+    const handleDelete = (k) => {
+      document.querySelector(`[data-id="${k - 1}"]`).remove();
+      if ([...document.querySelectorAll(`[data-id]`)].length === 0) {
+        location.reload();
+      }
+    }
+
+    const checkAllInputsIsValid = () => {
       const inputs = [...document.querySelector("table").getElementsByTagName('input')];
       const isAllInputsValid = inputs.every(element => element.value.trim().length > 0);
       if (isAllInputsValid) {
@@ -75,16 +98,6 @@
       } else {
         document.querySelector('#save').classList.add('opacity-50');
         document.querySelector('#save').disabled = true;
-      }
-    }
-
-    const onInput = (event) => {
-      const value = event.target.value;
-      const isValid = /^[0-9a-zA-Z\s]+$/gi.test(value)
-      if (isValid) {
-        event.target.classList.replace("ring-red-400", "ring-indigo-400");
-      } else {
-        event.target.classList.replace("ring-indigo-400", "ring-red-400");
       }
     }
   </script>

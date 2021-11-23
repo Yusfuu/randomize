@@ -19,7 +19,6 @@ const date = query('#initDate');
 
 
 _number?.addEventListener('input', (event) => {
-  // @ts-ignore
   const text = event.target.value;
 
   if (!isNaN(+text) && text.trim().length > 0) {
@@ -41,10 +40,8 @@ start?.addEventListener('submit', (event) => {
 });
 
 save?.addEventListener('click', () => {
-  // @ts-ignore
   const children = [...candidateContainer?.children];
   children.forEach((item) => {
-    // @ts-ignore
     const [nameInput, breifInput] = [...item.getElementsByTagName('input')];
 
     nameInput.disabled = true;
@@ -60,6 +57,16 @@ save?.addEventListener('click', () => {
   });
   save.remove();
   disableButton(shuffle, false);
+
+
+  [...document.querySelectorAll('#cel4')].forEach(element => {
+    element.innerHTML = `
+    <div class="flex p-1 items-center gap-3">
+  <span>Waitng...</span>
+  <img class="w-5 h-5" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/302/upside-down-face_1f643.png">
+</div>
+    `
+  });
 });
 
 shuffle?.addEventListener('click', () => {
@@ -76,6 +83,7 @@ shuffle?.addEventListener('click', () => {
 
   // disbale row that selected in shuffle
   getRowById(index)?.classList.add('opacity-30', 'cursor-not-allowed');
+  getRowById(index).lastElementChild.firstElementChild.innerHTML = "Relax thaden";
 
   // get next day with skipping the weekend
   current.date = getNextDay(currentDate, NUMBER_CANDIDATES - Candidates.length);
@@ -95,7 +103,7 @@ shuffle?.addEventListener('click', () => {
 
 // export button 
 exportButton?.addEventListener('click', () => {
-  // show init the Confetti
+  // show  the Confetti
   initConfetti();
   // get element in array and converted to string
   const clone = ExporterCandidates.map((item, key) => Object.values({ ...item, key }));
@@ -105,7 +113,6 @@ exportButton?.addEventListener('click', () => {
 });
 
 date?.addEventListener('change', (event) => {
-  // @ts-ignores
   currentDate = event.target.value;
 });
 

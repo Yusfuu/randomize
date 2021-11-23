@@ -1,4 +1,3 @@
-// @ts-ignore
 import ConfettiGenerator from "confetti-js";
 import moment from "moment";
 
@@ -37,17 +36,17 @@ export const row = (key) => (
 <td class="px-6 py-4 whitespace-nowrap">
   <div class="flex items-center">
     <div class="text-sm font-medium text-gray-900">
-    <input oninput="onInput(event)" onfocusout="focusout()" type="text" class="_input">
+    <input oninput="onInput(event)" type="text" class="_input ring-green-400">
     </div>
   </div>
 </td>
 <td class="px-6 py-4 whitespace-nowrap">
   <div class="text-sm text-gray-900">
-  <input oninput="onInput(event)" onfocusout="focusout()" type="text" class="_input">
+  <input oninput="onInput(event)" type="text" class="_input ring-green-400">
   </div>
 </td>
 <td class="px-6 py-4 whitespace-nowrap">
-  <span class="cursor-pointer px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+  <span id="cel4"  onclick="handleDelete(${key})" class="ccel4 cursor-pointer px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
     Delete Candidate
   </span>
 </td>
@@ -64,12 +63,8 @@ export const initConfetti = () => {
 
 export const query = (id) => document.querySelector(id);
 
-
-
 export const displayCandidate = (name, date) => {
-  // @ts-ignore
   query('#_name').innerHTML = name;
-  // @ts-ignore
   query('#_date').innerHTML = date;
 }
 
