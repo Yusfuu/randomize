@@ -64,6 +64,7 @@ export const initConfetti = () => {
 export const query = (id) => document.querySelector(id);
 
 export const displayCandidate = (name, date) => {
+
   query('#_name').innerHTML = name;
   query('#_date').innerHTML = date;
 }

@@ -6,6 +6,22 @@ let NUMBER_CANDIDATES;
 let Candidates = [];
 let currentDate = new Date().toISOString().split('T')[0];
 
+
+const sounds = {
+  wii: new Audio('./src/audio/wii.mp3'),
+  hrab: new Audio('./src/audio/hrab.mp3'),
+  hanya: new Audio('./src/audio/hanya.mp3'),
+}
+
+const soundRandom = [
+  new Audio('./src/audio/hee.mp3'),
+  new Audio('./src/audio/labalina.mp3'),
+  new Audio('./src/audio/nice.mp3')
+]
+
+setTimeout(() => {
+
+}, 2000);
 const start = query('#start');
 const _number = query('#_number');
 const startNow = query('#startNow');
@@ -17,6 +33,8 @@ const shuffle = query('#shuffle');
 const exportButton = query('#export');
 const date = query('#initDate');
 
+// disbale old dates
+date.min = currentDate;
 
 _number?.addEventListener('input', (event) => {
   const text = event.target.value;
@@ -37,6 +55,9 @@ start?.addEventListener('submit', (event) => {
   startContent?.remove();
   // init app
   initCandidates();
+  sounds.wii.play();
+  sounds.wii.volume = 0.1
+
 });
 
 save?.addEventListener('click', () => {
@@ -81,23 +102,59 @@ shuffle?.addEventListener('click', () => {
   // filter what left from the  Candidates array
   Candidates = Candidates.filter(item => +item.key !== index);
 
-  // disbale row that selected in shuffle
-  getRowById(index)?.classList.add('opacity-30', 'cursor-not-allowed');
-  getRowById(index).lastElementChild.firstElementChild.innerHTML = "Relax thaden";
-
   // get next day with skipping the weekend
   current.date = getNextDay(currentDate, NUMBER_CANDIDATES - Candidates.length);
+
   // display Candidate with name and date
-  displayCandidate(current.name, current.date);
+  document.querySelector('#display').classList.add('animate-bounce');
+  document.querySelector('#display').classList.remove('bg-gradient-to-br', 'from-green-400', 'to-cyan-500');
+  disableButton(shuffle, true);
+
+
+  setTimeout(() => {
+    try {
+      displayCandidate(current.name, current.date);
+      document.querySelector('#display').classList.add('bg-gradient-to-br', 'from-green-400', 'to-cyan-500');
+      document.querySelector('#display').classList.remove('animate-bounce');
+      // disbale row that selected in shuffle
+      getRowById(index)?.classList.add('opacity-30', 'cursor-not-allowed');
+      getRowById(index).lastElementChild.firstElementChild.innerHTML = "Relax thaden";
+
+      disableButton(shuffle, false);
+    } catch (error) {
+      return;
+    }
+
+
+    if (ExporterCandidates.length === 1) {
+      sounds.hrab.play();
+      setTimeout(() => {
+        sounds.hrab.pause();
+      }, 2000);
+      return;
+    }
+    if (ExporterCandidates.length === 2) {
+      sounds.hanya.play();
+      return;
+    }
+
+    const soundR = Math.floor(Math.random() * soundRandom.length)
+    soundRandom[soundR].play();
+    return;
+  }, 1500);
+
   ExporterCandidates.push(current);
 
   // if no candidate left remove the shuffle button
   if (len === 1) {
+    getRowById(index)?.classList.add('opacity-30', 'cursor-not-allowed');
+    getRowById(index).lastElementChild.firstElementChild.innerHTML = "Relax thaden";
     shuffle.remove();
     // enable export button
     disableButton(exportButton, false);
     query('#display')?.remove();
   };
+
 });
 
 
